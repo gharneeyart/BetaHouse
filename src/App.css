@@ -9,6 +9,12 @@ body {
   padding: 0;
   overflow-x: hidden; 
 }
+
+.active-link {
+  border-bottom: 2px solid white; 
+  padding-bottom: 1rem;
+}
+
 .backg{
   background-image: url('./Images/13625_1.png');
   background-size: cover;

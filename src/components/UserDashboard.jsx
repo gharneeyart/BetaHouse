@@ -34,6 +34,7 @@ const UserDashboard = () => {
               firstName: userData.firstName,
               lastName: userData.lastName,
               email: userData.email,
+              image: userData.image,
             });
           } else {
             console.error('Error fetching user data:', response.data.message);
@@ -100,6 +101,15 @@ const UserDashboard = () => {
         <h2 className="text-2xl font-semibold">User Information</h2>
         {editMode ? (
           <form onSubmit={handleUpdate} className="space-y-4">
+            <div className="">
+              <label className="block font-medium">Profile Img</label>
+              <input
+              type= 'file'
+              name='image'
+              value={formData.image}
+              onChange={handleChange}
+              className="border rounded p-2 w-full"/>
+            </div>
             <div>
               <label className="block font-medium">First Name</label>
               <input
@@ -166,7 +176,7 @@ const UserDashboard = () => {
       >
         Logout
       </button> */}
-      <ProductForm/>
+      {/* <ProductForm/> */}
     </div>
   );
 };

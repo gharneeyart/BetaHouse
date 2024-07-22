@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/Auth';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { auth, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation(); // Get current location
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -20,20 +21,33 @@ const NavBar = () => {
     return `${firstName?.charAt(0) || ''}${lastName?.charAt(0) || ''}`.toUpperCase();
   };
 
+  // Function to check if the link is active
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <div className='h-[121px] hidden md:flex justify-center items-center md:px-8 lg:px-12 fixed right-0 left-0 bg-[#1D293F1F] '>
+    <div className='h-[121px] hidden md:flex justify-center items-center md:px-8 lg:px-12 fixed right-0 left-0 bg-[#1D293F1F]'>
       <div className="flex justify-between items-center h-[50px] w-[1242.09px]">
         <div className="w-[215.66px] h-[47.21px] font-poppins">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
           <span className='font-medium text-[28.33px] text-white text-center'>BetaHouse</span>
         </div>
-        <div className="">
+        <div>
           <ul className='flex text-xl md:text-base md:gap-x-6 font-medium gap-x-8 text-[#F5F5F5]'>
-            <li><a href="/">Home</a></li>
-            <li><a href="/">Properties</a></li>
-            <li><a href="/">About Us</a></li>
-            <li><a href="/">Blog</a></li>
-            <li><a href="/">Contact Us</a></li>
+            <li>
+              <Link to="#" className={isActive('#') ? 'active-link' : ''}>Home</Link>
+            </li>
+            <li>
+              <Link to="/" className={isActive('/') ? 'active-link' : ''}>Properties</Link>
+            </li>
+            <li>
+              <Link to="#" className={isActive('#') ? 'active-link' : ''}>About Us</Link>
+            </li>
+            <li>
+              <Link to="#" className={isActive('#') ? 'active-link' : ''}>Blog</Link>
+            </li>
+            <li>
+              <Link to="#" className={isActive('#') ? 'active-link' : ''}>Contact Us</Link>
+            </li>
           </ul>
         </div>
         
@@ -93,23 +107,23 @@ const NavBar = () => {
                     </a>
                   </li>
                   <li>
-                    {isAuthenticated ? (
-                      <Link
-                        to="/login"
-                        
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Sign out
-                      </Link>
-                    ) : (
-                      <Link
-                        to="/login"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        onClick={handleLogout}
-                      >
-                        Sign in
-                      </Link>
-                    )}
+                  {isAuthenticated ? (
+        <Link
+          to="/login"
+          onClick={handleLogout}
+          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+        >
+          Sign out
+        </Link>
+      ) : (
+        <Link
+          to="/login"
+          
+          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+        >
+          Sign in
+        </Link>
+      )}
                   </li>
                 </ul>
               </div>
