@@ -11,14 +11,14 @@ import Room from '../Images/Icon (2).png'
 
 const PropertyCard = ({property}) => {
   return (
-    <div className='border w-[336.33px] md:min-w-[426.33px] lg:min-w-[376.33px] h-[515.24px] md:h-[565.24px] lg:h-[545.24px] rounded-lg'>
+    <div className='border w-[336.33px] md:min-w-[426.33px] lg:min-w-[346.33px] h-[515.24px] md:h-[565.24px] lg:h-[525.24px] rounded-lg'>
          <div className="relative">
       {/* <img src={property.images.url} alt="Background"  /> */}
       {property.images && property.images.length > 0 && (
                 <img src={property.images[0].url} alt={property.name} width="100" className="w-full h-auto rounded-t-lg"/>
             )}
-      <div className="absolute top-0 left-0 p-5 flex flex-col gap-y-32 md:gap-y-[185px] lg:gap-y-40">
-        <div className="flex justify-between gap-x-28 md:gap-x-48 lg:gap-x-36 mb-2">
+      <div className="absolute top-0 left-0 p-5 flex flex-col gap-y-32 md:gap-y-[185px] lg:gap-y-32">
+        <div className="flex justify-between gap-x-28 md:gap-x-48 lg:gap-x-28 mb-2">
           <span className="bg-[#3D9970] text-[#FFFFFF] text-[13px] font-medium rounded w-24 h-9 flex items-center justify-center">Featured</span>
           <span className="bg-[#878787B2] text-[#FFFFFF] text-[13px] font-medium  w-24 h-9 flex items-center justify-center rounded">{property.status}</span>
         </div>

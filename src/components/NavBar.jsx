@@ -25,8 +25,8 @@ const NavBar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className='h-[121px] hidden md:flex justify-center items-center md:px-8 lg:px-12 fixed right-0 left-0 bg-[#1D293F1F]'>
-      <div className="flex justify-between items-center h-[50px] w-[1242.09px]">
+    <div className='h-[121px] max-w-full hidden md:flex justify-center items-center md:px-8 lg:px-10 fixed right-0 left-0 bg-[#1D293F1F]'>
+      <div className="w-full flex justify-between items-center h-[50px]">
         <div className="w-[215.66px] h-[47.21px] font-poppins">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
           <span className='font-medium text-[28.33px] text-white text-center'>BetaHouse</span>

@@ -8,7 +8,7 @@ const Property = () => {
   return (
    <>
      <Hero />
-    <div className='container mx-auto w-full px-4 md:px-12  pt-6 border space-y-4'>
+    <div className='container mx-auto w-full px-4 md:px-24  pt-6 border space-y-4'>
         <div className="flex justify-between md:items-center  flex-col md:flex-row">
             <div className="flex gap-x-6 ">
                 <div className="">
