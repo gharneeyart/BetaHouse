@@ -45,7 +45,7 @@ const PropertyC = () => {
 
     return (
         <div>
-            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center'>
                 {products.map((property) => (
                     <PropertyCard key={property._id} property={property} />
                 ))}

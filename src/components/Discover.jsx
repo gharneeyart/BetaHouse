@@ -33,34 +33,38 @@ const Discover = () => {
   };
 
   return (
-    <div className='px-4 md:px-8 lg:px-12 w-full py-12 border'>
-      <h1 className='text-center text-3xl md:text-4xl lg:text-5xl font-semibold mb-8'>Discover Our Popular Properties</h1>
-      <Slider {...settings}>
-        {discover.map((property, index) => (
-          <div key={index} className="relative p-2">
-            <div className="h-64 md:h-80 lg:h-96 w-full rounded-lg overflow-hidden">
-              <img src={property.image} alt="" className='object-cover h-full w-full rounded-lg'/>
+    <div className='h-full px-10 md:px-12 w-full py-12 border'>
+      <div className="">
+        <h1 className='text-center text-5xl font-semibold mb-8'>Discover Our Popular Properties</h1>
+        <Slider {...settings} className=''>
+          {discover.map((property, index) => (
+            <div key={index} className="relative m-4">
+              <div className="h-[412px] w-[280px] rounded-lg">
+                <img src={property.image} alt="" className='object-cover h-full w-full rounded-lg'/>
+              </div>
+              <div className="absolute top-[200px] left-0 h-[212px]  w-[280px] text-[#FFFFFF] border flex flex-col justify-end rounded-b-lg"  >
+                <div className="bg-[#4A4A4C33] space-y-2 pl-4 pb-4">
+                  <div className="font-semibold text-lg space-y-2">
+                    <p>Semi Detached Duplex</p>
+                    <span>{property.price}</span>
+                  </div>
+                  <div className="text-sm">
+                    <span className='pr-2'>{property.bed} Bed</span>
+                    <span className='border-r border-l px-2'>{property.bath} Bath</span>
+                    <span className='px-2'>720 sq ft</span>
+                  </div>
+                  <div className="flex gap-x-[11px] items-center">
+                    <FaLocationDot />
+                    <span className='text-[14.79px]'>{property.location}</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/50 via-transparent to-transparent rounded-b-lg text-white p-4">
-              <div className="font-semibold text-lg space-y-1">
-                <p>Semi Detached Duplex</p>
-                <span>{property.price}</span>
-              </div>
-              <div className="text-sm">
-                <span className='pr-2'>{property.bed} Bed</span>
-                <span className='border-r border-l px-2'>{property.bath} Bath</span>
-                <span className='px-2'>720 sq ft</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaLocationDot />
-                <span>{property.location}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </Slider>
+      </div>
     </div>
-  );
+  )
 };
 
 const NextArrow = (props) => {
