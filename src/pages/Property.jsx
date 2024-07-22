@@ -7,7 +7,7 @@ import PropertyC from '../components/PropertyC'
 const Property = () => {
   return (
    <>
-     <Hero/>
+     <Hero />
     <div className='w-full px-4 md:px-12  pt-6 border space-y-4'>
         <div className="flex justify-between md:items-center  flex-col md:flex-row">
             <div className="flex gap-x-6 ">
