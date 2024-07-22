@@ -33,7 +33,7 @@ const Discover = () => {
   };
 
   return (
-    <div className='container mx-auto h-full px-10 md:px-12 w-full py-12 '>
+    <div className='h-full px-10 md:px-12 w-full py-12 '>
       <div className="">
         <h1 className='text-center text-3xl md:text-5xl font-semibold mb-8'>Discover Our Popular Properties</h1>
         <Slider {...settings} className=''>

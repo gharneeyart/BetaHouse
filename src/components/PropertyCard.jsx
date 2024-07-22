@@ -11,7 +11,7 @@ import Room from '../Images/Icon (2).png'
 
 const PropertyCard = ({property}) => {
   return (
-    <div className='border w-[336.33px] md:min-w-[386.33px] lg:min-w-[346.33px] h-[515.24px] md:h-[545.24px] lg:h-[525.24px] rounded-lg'>
+    <div className='border w-[336.33px] md:min-w-[396.33px] lg:min-w-[346.33px] h-[515.24px] md:h-[545.24px] lg:h-[525.24px] rounded-lg'>
          <div className="relative">
       {/* <img src={property.images.url} alt="Background"  /> */}
       {property.images && property.images.length > 0 && (
@@ -56,7 +56,7 @@ const PropertyCard = ({property}) => {
             <div className="border-t-2 border-t-[#E8E8E8] ">
                 <div className="flex h-[63px] items-end justify-between">
                     <div className="">
-                        <p className='text-[#373737] font-semibold text-[22px]'><span>{property.price}</span>/<span>{property.duration}</span></p>
+                        <p className='text-[#373737] font-semibold text-[22px]'><span>{parseFloat(property.price).toLocaleString()}</span><span>{property.duration && <span>/{property.duration}</span>}</span></p>
                     </div>
                     <div className="flex justify-between items-end text-[#484848] w-[129.83px] h-[36.76px]">
                     <MdCompareArrows size={25}/><GoShareAndroid size={25}/><GrFavorite size={25} />

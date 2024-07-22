@@ -53,7 +53,12 @@ const UserDashboard = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  const handleImageChange = (e) => {
+    setFormData({
+      ...formData,
+      imageFile: e.target.file,
+    });
+  };
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -104,10 +109,10 @@ const UserDashboard = () => {
             <div className="">
               <label className="block font-medium">Profile Img</label>
               <input
-              type= 'file'
+              type= "file"
               name='image'
               value={formData.image}
-              onChange={handleChange}
+              onChange={handleImageChange}
               className="border rounded p-2 w-full"/>
             </div>
             <div>
@@ -149,7 +154,7 @@ const UserDashboard = () => {
           </form>
         ) : (
           <div className="space-y-4">
-            <img src={user?.image} alt="" className='w-16 h-16'/>
+            <img src={user?.image} alt="" className='w-20 h-20 rounded-full flex items-center'/>
             <p className='font-medium text-lg'><span className='font-bold text-xl'>First Name:</span> {user?.firstName}</p>
             <p className='font-medium text-lg'><span className='font-bold text-xl'>Last Name:</span> {user?.lastName}</p>
             <p className='font-medium text-lg'><span className='font-bold text-xl'>Email:</span> {user?.email}</p>
@@ -170,13 +175,7 @@ const UserDashboard = () => {
           </div>
         )}
       </div>
-      {/* <button
-        onClick={logout}
-        className="bg-gray-500 text-white px-4 py-2 rounded"
-      >
-        Logout
-      </button> */}
-      {/* <ProductForm/> */}
+     
     </div>
   );
 };

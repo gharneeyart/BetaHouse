@@ -12,18 +12,20 @@ import ForgotPassword from './components/ForgotPassword';
 
 const LayoutWithNavAndFooter = () => (
   <div>
-    {/* <Sidebar/> */}
+    
     <NavBar />
     <Sidebar/>
-    <Outlet /> {/* This renders the nested route component */}
+    <Outlet /> 
     <Footer />
   </div>
 );
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
+    
+      <Router>
+     
+     <Routes>
         <Route element={<LayoutWithNavAndFooter />}>
           <Route path="/" element={<Property />} />
           <Route path="/dashboard" element={<UserDashboard/>}/>
@@ -32,7 +34,9 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
       </Routes>
+   
     </Router>
+    
   );
 };
 

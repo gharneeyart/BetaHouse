@@ -6,7 +6,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { auth, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation(); // Get current location
+  const location = useLocation(); 
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -25,7 +25,7 @@ const NavBar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className='h-[121px] max-w-full hidden md:flex justify-center items-center md:px-8 lg:px-10 fixed right-0 left-0 bg-[#1D293F1F]'>
+    <div className='h-[121px] max-w-full hidden md:flex justify-center items-center md:px-8 lg:px-10 fixed right-0 left-0 bg-[#1D293F1F] z-30'>
       <div className="w-full flex justify-between items-center h-[50px]">
         <div className="w-[215.66px] h-[47.21px] font-poppins">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
@@ -55,7 +55,7 @@ const NavBar = () => {
           {auth?.user?.image ? (
             <img src={auth?.user?.image} alt="User" className='rounded-full w-[48.44px] h-[48.44px]' />
           ) : (
-            <div className='rounded-full w-[48.44px] h-[48.44px] bg-gray-500 flex items-center justify-center text-white'>
+            <div className='rounded-full w-[48.44px] h-[48.44px] bg-gray-500 flex items-center justify-center text-white font-semibold text-2xl'>
               {getInitials(auth?.user?.firstName, auth?.user?.lastName)}
             </div>
           )}
