@@ -1,0 +1,20 @@
+#root {
+  max-width: 1440px;
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
+  /* text-align: center; */
+}
+.backg{
+  background-image: url('./Images/13625_1.png');
+  background-size: cover;
+}
+.herobg{
+  background-image: url('./Images/Frame_9325.png');
+  background-size: cover;
+}
+@media (max-width: 1024px){
+  .backgs{
+    background-image: url('./Images/13625_1.png');
+    background-size: cover;
+  }
+}
