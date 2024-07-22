@@ -56,9 +56,9 @@ const PropertyCard = ({property}) => {
             <div className="border-t-2 border-t-[#E8E8E8] ">
                 <div className="flex h-[63px] items-end justify-between">
                     <div className="">
-                        <p className='text-[#373737] font-semibold text-[22px]'><span>{parseFloat(property.price).toLocaleString()}</span><span>{property.duration && <span>/{property.duration}</span>}</span></p>
+                        <p className='text-[#373737] font-semibold text-base md:text-xl '><span>{parseFloat(property.price).toLocaleString()}</span><span>{property.duration && <span>/{property.duration}</span>}</span></p>
                     </div>
-                    <div className="flex justify-between items-end text-[#484848] w-[129.83px] h-[36.76px]">
+                    <div className="flex justify-between items-end text-[#484848] w-24 md:w-[129.83px] h-[36.76px]">
                     <MdCompareArrows size={25}/><GoShareAndroid size={25}/><GrFavorite size={25} />
                     </div>
                     
