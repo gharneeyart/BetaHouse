@@ -4,13 +4,14 @@ import { HiMenu, HiX } from 'react-icons/hi';
 import { useAuth } from '../contexts/Auth';
 
 const Sidebar = () => {
+  const [isOpened, setIsOpened] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { auth, logout, isAuthenticated } = useAuth();
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setIsOpened(!isOpened);
   };
   const getInitials = (firstName, lastName) => {
     return `${firstName?.charAt(0) || ''}${lastName?.charAt(0) || ''}`.toUpperCase();
@@ -22,7 +23,7 @@ const Sidebar = () => {
 
 
   return (
-    <div className="md:hidden fixed z-30 w-[400px] md:w-0 bg-gray-400 py-1 flex justify-between items-center">
+    <div className="md:hidden fixed z-30 w-full md:w-0 bg-gray-400 py-1 flex justify-between items-center">
       
       <div className=" w-[215.66px] h-[47.21px] font-poppins flex items-center pl-4">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
@@ -95,10 +96,11 @@ const Sidebar = () => {
               </svg>
             </button>
 
-            {isOpen && (
+            {isOpened && (
               <div
                 id="dropdown"
                 className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700 pl-2"
+                
               >
                 <ul className="py-2 text-xl text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                   <li>
