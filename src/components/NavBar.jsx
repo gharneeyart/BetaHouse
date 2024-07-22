@@ -25,7 +25,7 @@ const NavBar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className='h-[121px] max-w-full hidden md:flex justify-center items-center md:px-8 lg:px-10 fixed right-0 left-0 bg-[#1D293F1F]'>
+    <div className='container mx-auto h-[121px] max-w-full hidden md:flex justify-center items-center md:px-8 lg:px-10 fixed right-0 left-0 bg-[#1D293F1F]'>
       <div className="w-full flex justify-between items-center h-[50px]">
         <div className="w-[215.66px] h-[47.21px] font-poppins">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
@@ -96,34 +96,24 @@ const NavBar = () => {
                       Dashboard
                     </Link>
                   </li>
-                  <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                      Earnings
-                    </a>
-                  </li>
+                  
                   <li>
                   {isAuthenticated ? (
-        <Link
-          to="/login"
-          onClick={handleLogout}
-          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-        >
-          Sign out
-        </Link>
-      ) : (
-        <Link
-          to="/login"
-          
-          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-        >
-          Sign in
-        </Link>
-      )}
+                      <Link
+                        to="/login"
+                        onClick={handleLogout}
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Sign out
+                      </Link>
+                    ) : (
+                      <Link
+                        to="/login"
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Sign in
+                      </Link>
+                    )}
                   </li>
                 </ul>
               </div>

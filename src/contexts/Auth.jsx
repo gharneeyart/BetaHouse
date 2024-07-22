@@ -6,93 +6,88 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [auth, setAuth] = useState({
-        user: null,
-        token: "",
+  const [auth, setAuth] = useState({
+    user: null,
+    token: "",
+  });
+
+  axios.defaults.baseURL = import.meta.env.VITE_REACT_APP_API_URL;
+
+  useEffect(() => {
+    const data = localStorage.getItem("auth");
+    if (data) {
+      const parsedData = JSON.parse(data);
+      setAuth({ user: parsedData.user, token: parsedData.token });
+      setIsAuthenticated(true); // Update isAuthenticated based on localStorage
+      axios.defaults.headers.common["Authorization"] = `Bearer ${parsedData.token}`;
+    }
+  }, []);
+
+  useEffect(() => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${auth?.token}`;
+  }, [auth?.token]);
+
+  const login = async (email, password) => {
+    try {
+      const { data } = await axios.post("/auth/login", {
+        email,
+        password,
       });
 
-    axios.defaults.baseURL = import.meta.env.VITE_REACT_APP_API_URL;
+      if (data && data.user) {
+        setAuth({ user: data.user, token: data.token });
+        setIsAuthenticated(true);
+        localStorage.setItem("auth", JSON.stringify(data));
+        axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+        return data;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      throw new Error(error?.response?.data?.message || "An error occurred while logging in");
+    }
+  };
 
-    useEffect(() => {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${auth?.token}`;
-      }, [auth?.token]);
-    
-      useEffect(() => {
-        const data = localStorage.getItem("auth");
-        if (data) {
-          const parsedData = JSON.parse(data);
-          setAuth({ ...auth, user: parsedData.user, token: parsedData.token });
-        }
-      }, []);
+  const signup = async (firstName, lastName, email, password) => {
+    try {
+      const { data } = await axios.post("/auth/signup", {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
 
-      const login = async (email, password) => {
-        try {
-          const { data } = await axios.post("/auth/login", {
-            email,
-            password,
-          });
-      
-          if (data && data.user) {
-            // Login successful
-            setIsAuthenticated(true);
-            setAuth({ user: data.user, token: data.user.token });
-            localStorage.setItem("auth", JSON.stringify(data));
-            return data;
-          } else {
-            // Login failed
-            return false;
-          }
-        } catch (error) {
-          console.error("Login error:", error);
-          if (error?.response && error?.response?.data && error?.response?.data?.message) {
-            throw new Error(error.response.data.message); 
-          } else {
-            throw new Error("An error occurred while logging in");
-          }
-        }
-      };
+      if (data.success) {
+        setAuth({
+          user: data.user,
+          token: data.token,
+        });
+        setIsAuthenticated(true);
+        localStorage.setItem("auth", JSON.stringify(data));
+        axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+      }
+      return data;
+    } catch (error) {
+      console.error("Signup Error:", error);
+      throw new Error(error?.response?.data?.message || "An error occurred while signing up");
+    }
+  };
 
-      const signup = async (firstName, lastName, email, password) => {
-        try {
-            const { data } = await axios.post("/auth/signup", {
-                firstName,
-                lastName,
-                email,
-                password,
-            });
-    
-            if (data.success) {  // Check for success based on server response
-                setAuth({
-                    user: data.user,
-                    token: data.token,
-                });
-                localStorage.setItem("auth", JSON.stringify(data));
-            }
-            return data;
-        } catch (error) {
-            console.error("Signup Error:", error);
-            if (error?.response && error?.response?.data && error?.response?.data) {
-                throw new Error(error.response.data.message); 
-              } else {
-                throw new Error("An error occurred while logging in");
-              }
-        }
-    };
+  const logout = () => {
+    localStorage.removeItem("auth");
+    setIsAuthenticated(false);
+    setAuth({ user: null, token: "" });
+    delete axios.defaults.headers.common["Authorization"];
+  };
 
-      const logout = () => {
-        // Clear auth data
-        localStorage.removeItem("auth");
-        setIsAuthenticated(false);
-        setAuth({ user: null, token: "" });
-      };
+  return (
+    <AuthContext.Provider value={{ auth, isAuthenticated, setAuth, login, signup, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-      return (
-        <AuthContext.Provider value={{ auth, isAuthenticated, setAuth, login, signup, logout}}>
-          {children}
-        </AuthContext.Provider>
-      );
-    
-}
 const useAuth = () => useContext(AuthContext);
 
 export { useAuth, AuthProvider };

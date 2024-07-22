@@ -3,16 +3,17 @@ import React from 'react'
 import Hero from '../components/Hero'
 import Discover from '../components/Discover'
 import PropertyC from '../components/PropertyC'
+import { GiSettingsKnobs } from "react-icons/gi";
 
 const Property = () => {
   return (
    <>
      <Hero />
-    <div className='container mx-auto w-full px-4 md:px-24  pt-6 border space-y-4'>
+    <div className=' w-full px-4 md:px-24  pt-6 border space-y-4'>
         <div className="flex justify-between md:items-center  flex-col md:flex-row">
             <div className="flex gap-x-6 ">
-                <div className="">
-                    <img src="" alt="" />
+                <div className="flex items-center gap-2">
+                <GiSettingsKnobs size={20}/>
                     <span className='text-lg md:text-[21px]'>More Filter</span>
                 </div>
                 <div className="">
