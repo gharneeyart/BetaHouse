@@ -22,7 +22,7 @@ const Sidebar = () => {
 
 
   return (
-    <div className="md:hidden fixed z-30 w-full bg-gray-400 py-1 flex justify-between items-center">
+    <div className="md:hidden fixed z-30 w-full md:w-0 bg-gray-400 py-1 flex justify-between items-center">
       
       <div className=" w-[215.66px] h-[47.21px] font-poppins flex items-center pl-4">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
