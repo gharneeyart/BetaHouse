@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { useAuth } from '../contexts/Auth';
 
@@ -22,7 +22,7 @@ const Sidebar = () => {
 
 
   return (
-    <div className="md:hidden fixed z-30 w-full bg-gray-800 py-1 flex justify-between items-center">
+    <div className="md:hidden fixed z-30 w-[400px] bg-gray-800 py-1 flex justify-between items-center">
       {/* Menu Button */}
       <div className=" w-[215.66px] h-[47.21px] font-poppins flex items-center pl-4">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
