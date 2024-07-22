@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; 
+  /* overflow-x: hidden;  */
 }
 
 .active-link {
@@ -15,7 +15,7 @@ body {
   background-size: cover;
 }
 .herobg{
-  background-image: url('./Images/Frame_9325.png');
+  background-image: url(./Images/Frame_9325.png);
   background-size: cover;
 }
 @media (max-width: 1024px){
