@@ -13,7 +13,7 @@ const SignUp = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [agreeTerms, setAgreeTerms] = useState(false);
     const [errors, setErrors] = useState({});
-    
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     const {signup } = useAuth();
@@ -63,7 +63,9 @@ const SignUp = () => {
               return;
             }
             try {
+              setLoading(true); 
               const data = await signup(firstName, lastName, email, password);
+              setLoading(false);
               if (data.success) {
                 navigate("/");
               } else {
@@ -71,13 +73,14 @@ const SignUp = () => {
               }
             } catch (err) {
               setErrors({ form: err.message || "An unexpected error occurred" });
+              setLoading(false);
             }
           };
         
     
   return (
-    <div className='backgs container flex mx-auto max-w-full h-full md:h-screen lg:h-full'>
-        <div className="w-full  lg:w-[47%] flex flex-col justify-center items-center py-16 px-20  ">
+    <div className='backgs flex  h-full md:h-screen lg:h-full'>
+        <div className="max-w-full  lg:w-[47%] flex flex-col justify-center items-center py-16 px-20  ">
             <div className="w-[350px] md:w-[650px] lg:w-[482px] flex flex-col gap-y-8">
             <div className="lg:hidden w-[215.66px] h-[47.21px] font-poppins flex items-center">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
@@ -124,15 +127,15 @@ const SignUp = () => {
                                 <label className='font-medium text-white lg:text-[#181A20D1] ml-2'>I agree to <span className='text-[#3D9970]'>Terms of Service</span> and <span className='text-[#3D9970]'>Privacy Policies</span></label>
                                 {errors.agreeTerms && <div className="text-red-500">{errors.agreeTerms}</div>}
                             </div>
-                            <button className='bg-[#3D9970] w-[350px] md:w-full lg:w-[482px] rounded-2xl h-16 text-[22px] text-[#FFFFFF]' type="submit" onSubmit={handleSubmit}>Sign up</button>
+                            <button className='bg-[#3D9970] w-[350px] md:w-full lg:w-[482px] rounded-2xl h-16 text-[22px] text-[#FFFFFF]' type="submit" onSubmit={handleSubmit} disabled={loading}>{loading ? 'Signing in...' : 'Sign in'}</button>
                         </form>
                     </div>
                 <div className="flex flex-col gap-y-8">
                     <div className="flex flex-col gap-y-3.5">
                         {/* <button className='bg-[#3D9970] w-[350px] md:w-full lg:w-[482px] rounded-2xl h-16 text-[22px] text-[#FFFFFF]' onClick={handleSubmit}>Sign up</button> */}
-                        <div className="flex items-center w-[330px] md:w-[411px]">
+                        <div className="flex items-center w-[330px] md:w-[411px] justify-center">
                         <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"></div>
-                            <span className="mx-4 text-white md:text-[#4F4E4E] font-semibold">or</span>
+                            <span className="mx-4 text-white lg:text-[#4F4E4E] font-semibold">or</span>
                             <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"></div>
                         </div>
                         <button className='w-[350px] md:w-full lg:w-[482px] rounded-2xl border border-white lg:border-black h-16 flex justify-center items-center gap-x-2.5 text-white lg:text-black'>

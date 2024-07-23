@@ -9,6 +9,7 @@ import './App.css'
 import Sidebar from './components/Sidebar';
 import UserDashboard from './components/UserDashboard';
 import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
 
 const LayoutWithNavAndFooter = () => (
   <div>
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path='/forgotpassword' element={<ForgotPassword/>}/>
+        <Route path='/reset/:token' element={<ResetPassword/>}/>
       </Routes>
    
     </Router>

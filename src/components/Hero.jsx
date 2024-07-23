@@ -1,6 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const Hero = () => {
+  const [bedrooms, setBedrooms] = useState(0);
+
+  const handleIncrement = () => {
+    setBedrooms(bedrooms + 1);
+  };
+
+  const handleDecrement = () => {
+    if (bedrooms > 0) {
+      setBedrooms(bedrooms - 1);
+    }
+  };
   return (
     <div className="herobg h-[680px] flex flex-col justify-center items-center gap-y-14 md: w-full pt-32 md:pt-12">
       <div className="w-full max-w-[988px] text-center flex flex-col justify-center items-center text-[#FFFFFF] gap-y-6 px-4">
@@ -19,13 +30,13 @@ const Hero = () => {
           </div>
           <div className="flex flex-col w-full max-w-[297px] justify-center items-center md:my-5 my-4 px-4">
             <label htmlFor="" className="font-semibold text-sm mb-2">BEDROOM</label>
-            <div className="w-full max-w-[104px] flex justify-between">
-              <span className="h-5 w-5 rounded-full border border-[#30343B] flex justify-center items-center">-</span>
-              <input type="text" placeholder="0" className="w-2.5 outline-none text-center" />
-              <span className="h-5 w-5 rounded-full border border-[#30343B] flex justify-center items-center">+</span>
+            <div className="w-full max-w-[104px] flex justify-between items-center">
+              <span className="h-5 w-5 rounded-full border border-[#30343B] flex justify-center items-center" onClick={handleDecrement}>-</span>
+              <input type="text" placeholder="0" value={bedrooms} readOnly className="w-2.5 outline-none text-center" />
+              <span className="h-5 w-5 rounded-full border border-[#30343B] flex justify-center items-center" onClick={handleIncrement}>+</span>
             </div>
           </div>
-          <button className="bg-[#3D9970] text-[#FFFFFF] w-full max-w-[279px] text-xl rounded-lg md:rounded-l-none md:rounded-r-lg py-4 md:py-7 px-4">Find Property</button>
+          <button className="bg-[#3D9970] text-[#FFFFFF] w-full max-w-[279px] text-xl rounded-lg md:rounded-l-none md:rounded-r-lg py-4 md:py-10 px-5">Find Property</button>
         </div>
       </div>
     </div>

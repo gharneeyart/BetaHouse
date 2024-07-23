@@ -29,12 +29,12 @@ const ForgotPassword = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full p-2 border border-gray-300 rounded mt-1"
+                            className="w-full p-2 border border-[#3D9970] rounded mt-1"
                         />
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300"
+                        className="w-full bg-[#3D9970] text-white py-2 rounded hover:border-[#3D9970] hover:text-[#3D9970] transition duration-300"
                     >
                         Submit
                     </button>

@@ -50,7 +50,7 @@ const Login = () => {
       valid = false;
     }
 
-    if (!valid) return; // Stop if form is not valid
+    if (!valid) return; 
 
     try {
       setLoading(true);
@@ -58,11 +58,11 @@ const Login = () => {
       setLoading(false);
 
       if (data) {
-        // Handle storing authentication info based on "Remember me"
+        
         if (rememberMe) {
-          localStorage.setItem('user', JSON.stringify(data)); // Save to local storage
+          localStorage.setItem('user', JSON.stringify(data)); 
         } else {
-          sessionStorage.setItem('user', JSON.stringify(data)); // Save to session storage
+          sessionStorage.setItem('user', JSON.stringify(data)); 
         }
         navigate("/");
       } else {
@@ -76,8 +76,8 @@ const Login = () => {
   };
 
   return (
-    <div className='backgs container flex mx-auto max-w-full h-full md:h-screen lg:h-full'>
-      <div className="w-full lg:w-[47%] flex flex-col justify-center items-center py-16 md:py-20 px-20">
+    <div className='backgs flex  h-full md:h-screen lg:h-full'>
+      <div className="max-w-full lg:w-[47%] flex flex-col justify-center items-center py-16 md:py-20 px-20">
         <div className="w-[350px] md:w-[650px] lg:w-[482px] flex flex-col gap-y-8">
           <div className="lg:hidden w-[215.66px] h-[47.21px] font-poppins flex items-center">
             <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
@@ -113,7 +113,7 @@ const Login = () => {
                   {passwordError && <p className='text-red-500 text-sm'>{passwordError}</p>}
                 </div>
               </div>
-              <div className="flex gap-x-20 md:gap-x-52">
+              <div className="flex gap-x-20 md:gap-x-96 lg:gap-x-52">
                 <div className="flex gap-x-3 items-center">
                   <input 
                     type="checkbox" 
@@ -121,7 +121,7 @@ const Login = () => {
                     checked={rememberMe} 
                     onChange={handleRememberMeChange} 
                   />
-                  <label className='font-medium'>Remember me</label>
+                  <label className='font-medium text-white lg:text-black'>Remember me</label>
                 </div>
                 <Link to='/forgotpassword'><span className='text-[#EC5E5E]'>Forgot password?</span></Link>
               </div>
@@ -136,19 +136,19 @@ const Login = () => {
           </div>
           <div className="flex flex-col gap-y-8">
             <div className="flex flex-col gap-y-3.5 justify-center items-center">
-              <div className="flex items-center w-[411px]">
+              <div className="flex items-center w-[330px] lg:w-[411px]">
                 <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"></div>
                 <span className="mx-4 text-white lg:text-[#4F4E4E] font-semibold">or</span>
                 <div className="flex-grow h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"></div>
               </div>
-              <button className='w-[350px] md:w-full lg:w-[480px] rounded-2xl border border-white lg:border-black h-16 flex justify-center items-center gap-x-2.5'>
+              <button className='w-[350px] md:w-full lg:w-[480px] rounded-2xl border-2 border-white lg:border-black h-16 flex justify-center items-center gap-x-2.5'>
                 <img src={Google} alt="Google logo" />
                 <span className='text-[22px] text-white lg:text-black'>Continue with Google</span>
               </button>
             </div>
             <div>
-              <p className='text-lg text-center text-white md:text-[#716F6F]'>
-                New User? <Link to='/signup' className='text-black md:text-[#3D9970]'>Sign up</Link>
+              <p className='text-lg text-center text-white lg:text-[#716F6F]'>
+                New User? <Link to='/signup' className='text-blue-500 lg:text-[#3D9970]'>Sign up</Link>
               </p>
             </div>
           </div>

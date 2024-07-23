@@ -9,19 +9,19 @@ const Property = () => {
   return (
    <>
      <Hero />
-    <div className=' w-full px-4 md:px-16 lg:px-24  pt-6 border space-y-4'>
+    <div className=' w-full px-4 md:px-14 lg:px-24  pt-6 border space-y-4'>
     
         <div className="flex justify-between md:items-center  flex-col md:flex-row">
-            <div className="flex gap-x-6 ">
-                <div className="flex items-center gap-2">
-                <GiSettingsKnobs size={20}/>
-                    <span className='text-lg md:text-[21px]'>More Filter</span>
+            <div className="flex flex-col md:flex-row gap-x-6 ">
+                <div className="flex  items-center gap-2">
+                <GiSettingsKnobs size={30}/>
+                    <span className='text-[21px]'>More Filter</span>
                 </div>
                 <div className="">
-                    <p className='text-lg md:text-[21px]'>Showing 1 – 10 of 15 results</p>
+                    <p className='text-[21px]'>Showing 1 – 10 of 15 results</p>
                 </div>
             </div>
-            <div className="space-x-4">
+            <div className="space-x-4 flex justify-end items-center">
                 <span className='text-[#717171] text-xl'>Sort by:</span>
             <button
         id="dropdownDefaultButton"

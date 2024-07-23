@@ -26,13 +26,13 @@ const NavBar = () => {
 
   return (
     <div className='hidden md:block fixed w-full bg-[#1D293F1F] z-30'>
-      <div className="max-w-screen-xl mx-auto flex justify-between items-center h-[121px] px-4 md:px-8">
-        <div className="w-[215.66px] h-[47.21px] font-poppins">
+      <div className="max-w-screen-xl mx-auto flex justify-between items-center h-[121px] px-4 md:px-4 lg:px-8 ">
+        <div className="w-[215.66px] md:w-[180px] h-[47.21px] font-poppins flex items-center">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
-          <span className='font-medium text-[28.33px] text-white text-center'>BetaHouse</span>
+          <span className='font-medium text-[28.33px] md:text-xl lg:text-[28.33px] text-white text-center'>BetaHouse</span>
         </div>
         <div>
-          <ul className='flex text-xl md:text-base md:gap-x-6 font-medium gap-x-8 text-[#F5F5F5]'>
+          <ul className='flex text-xl md:text-sm md:gap-x-3 font-medium lg:gap-x-8 text-[#F5F5F5]'>
             <li>
               <Link to="#" className={isActive('#') ? 'active-link' : ''}>Home</Link>
             </li>
@@ -51,7 +51,7 @@ const NavBar = () => {
           </ul>
         </div>
         
-        <div className="w-auto flex items-center gap-x-4">
+        <div className="w-auto flex items-center md:gap-x-2 lg:gap-x-4">
           {auth?.user?.image ? (
             <img src={auth?.user?.image} alt="User" className='rounded-full w-[48.44px] h-[48.44px]' />
           ) : (
@@ -67,7 +67,7 @@ const NavBar = () => {
               type="button"
               onClick={toggleDropdown}
             >
-              <span>{auth?.user ? `${auth?.user?.firstName} ${auth?.user?.lastName}` : 'My Account'}</span>
+              <span className='md:text-xl lg:text-2xl'>{auth?.user ? `${auth?.user?.firstName} ${auth?.user?.lastName}` : 'My Account'}</span>
               <svg
                 className="w-4 h-4 ms-3"
                 aria-hidden="true"

@@ -39,11 +39,11 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-[#1D293F] text-white transform ${
+        className={`fixed top-0 left-0 h-full w-72 bg-[#1D293F] text-white transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out z-50`}
       >
-        <div className="p-4 space-y-8">
+        <div className="p-6 space-y-8">
           <ul className="space-y-8 pl-4 text-lg">
             <li>
               <Link to="/" onClick={toggleSidebar}>Home</Link>
