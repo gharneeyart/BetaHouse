@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/Auth';
 import axios from 'axios';
-import ProductForm from './ProductForm';
 
 const UserDashboard = () => {
   const { auth, logout } = useAuth();
@@ -11,21 +10,19 @@ const UserDashboard = () => {
     firstName: '',
     lastName: '',
     email: '',
-    image: null
+    image: null,
+    imageFile: null,
   });
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         if (auth.user && auth.token) {
-          console.log('Fetching user data with token:', auth.token);
           const response = await axios.get(`/auth/user/${auth.user._id}`, {
             headers: {
               Authorization: `Bearer ${auth.token}`,
             },
           });
-          console.log(response);
-          console.log('API Response:', response.data);
 
           if (response.data.success) {
             const userData = response.data.user;
@@ -35,6 +32,7 @@ const UserDashboard = () => {
               lastName: userData.lastName,
               email: userData.email,
               image: userData.image,
+              imageFile: null,
             });
           } else {
             console.error('Error fetching user data:', response.data.message);
@@ -53,23 +51,35 @@ const UserDashboard = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleImageChange = (e) => {
+    const file = e.target.files[0];
     setFormData({
       ...formData,
-      imageFile: e.target.file,
+      imageFile: file,
+      image: URL.createObjectURL(file),
     });
   };
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put('/auth/user/update', formData, {
+      const formDataToSend = new FormData();
+      formDataToSend.append('firstName', formData.firstName);
+      formDataToSend.append('lastName', formData.lastName);
+      formDataToSend.append('email', formData.email);
+      if (formData.imageFile) {
+        formDataToSend.append('image', formData.imageFile);
+      }
+
+      const response = await axios.put('/auth/user/update', formDataToSend, {
         headers: {
           Authorization: `Bearer ${auth.token}`,
+          'Content-Type': 'multipart/form-data',
         },
       });
 
       if (response.data.success) {
-        console.log('User updated successfully:', response.data.user);
         setUser(response.data.user);
         setEditMode(false);
       } else {
@@ -106,15 +116,22 @@ const UserDashboard = () => {
         <h2 className="text-2xl font-semibold">User Information</h2>
         {editMode ? (
           <form onSubmit={handleUpdate} className="space-y-4">
-            <div className="">
+            <div>
               <label className="block font-medium">Profile Img</label>
               <input
-              type= "file"
-              name='image'
-              value={formData.image}
-              onChange={handleImageChange}
-              className="border rounded p-2 w-full"/>
+                type="file"
+                name="image"
+                onChange={handleImageChange}
+                className="border rounded p-2 w-full"
+              />
             </div>
+            {formData.image && (
+              <img
+                src={formData.image}
+                alt="Profile Preview"
+                className="w-20 h-20 rounded-full"
+              />
+            )}
             <div>
               <label className="block font-medium">First Name</label>
               <input
@@ -154,28 +171,35 @@ const UserDashboard = () => {
           </form>
         ) : (
           <div className="space-y-4">
-            <img src={user?.image} alt="" className='w-20 h-20 rounded-full flex items-center'/>
-            <p className='font-medium text-lg'><span className='font-bold text-xl'>First Name:</span> {user?.firstName}</p>
-            <p className='font-medium text-lg'><span className='font-bold text-xl'>Last Name:</span> {user?.lastName}</p>
-            <p className='font-medium text-lg'><span className='font-bold text-xl'>Email:</span> {user?.email}</p>
+            {user?.image && (
+              <img src={user.image} alt="Profile" className="w-20 h-20 rounded-full" />
+            )}
+            <p className="font-medium text-lg">
+              <span className="font-bold text-xl">First Name:</span> {user?.firstName}
+            </p>
+            <p className="font-medium text-lg">
+              <span className="font-bold text-xl">Last Name:</span> {user?.lastName}
+            </p>
+            <p className="font-medium text-lg">
+              <span className="font-bold text-xl">Email:</span> {user?.email}
+            </p>
             <div className="space-x-4">
-            <button
-              onClick={() => setEditMode(true)}
-              className="border-2 border-blue-800 text-blue-800 hover:bg-blue-800 hover:text-white font-semibold px-4 py-2 rounded-md"
-            >
-              Edit
-            </button>
-            <button
-              onClick={handleDelete}
-              className="border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-4 py-2 rounded-md font-semibold"
-            >
-              Delete Account
-            </button>
+              <button
+                onClick={() => setEditMode(true)}
+                className="border-2 border-blue-800 text-blue-800 hover:bg-blue-800 hover:text-white font-semibold px-4 py-2 rounded-md"
+              >
+                Edit
+              </button>
+              <button
+                onClick={handleDelete}
+                className="border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-4 py-2 rounded-md font-semibold"
+              >
+                Delete Account
+              </button>
             </div>
           </div>
         )}
       </div>
-     
     </div>
   );
 };
