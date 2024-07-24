@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/Auth';
 import axios from 'axios';
 
 const UserDashboard = () => {
-  const { auth, logout } = useAuth();
+  const { auth, logout, setAuth } = useAuth();
   const [user, setUser] = useState(null);
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({
@@ -14,37 +14,41 @@ const UserDashboard = () => {
     imageFile: null,
   });
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (auth.user && auth.token) {
-          const response = await axios.get(`/auth/user/${auth.user._id}`, {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            },
+  // Function to fetch user data
+  const fetchUserData = async () => {
+    try {
+      if (auth.user && auth.token) {
+        console.log('Fetching user data with token:', auth.token);
+        const response = await axios.get(`/auth/user/${auth.user._id}`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
+        console.log(response);
+        console.log('API Response:', response.data);
+
+        if (response.data.success) {
+          const userData = response.data.user;
+          setUser(userData);
+          setFormData({
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            email: userData.email,
+            image: userData.image,
+            imageFile: null,
           });
-
-          if (response.data.success) {
-            const userData = response.data.user;
-            setUser(userData);
-            setFormData({
-              firstName: userData.firstName,
-              lastName: userData.lastName,
-              email: userData.email,
-              image: userData.image,
-              imageFile: null,
-            });
-          } else {
-            console.error('Error fetching user data:', response.data.message);
-          }
         } else {
-          console.error('No user or token found');
+          console.error('Error fetching user data:', response.data.message);
         }
-      } catch (error) {
-        console.error('Error fetching user data:', error.response?.data?.message || error.message);
+      } else {
+        console.error('No user or token found');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching user data:', error.response?.data?.message || error.message);
+    }
+  };
 
+  useEffect(() => {
     fetchUserData();
   }, [auth.user, auth.token]);
 
@@ -80,8 +84,17 @@ const UserDashboard = () => {
       });
 
       if (response.data.success) {
+        console.log('User updated successfully:', response.data.user);
         setUser(response.data.user);
         setEditMode(false);
+
+        // Update the auth context and local storage with the new user data
+        const updatedAuth = { ...auth, user: response.data.user };
+        setAuth(updatedAuth);
+        localStorage.setItem('auth', JSON.stringify(updatedAuth));
+
+        // Re-fetch the user data to ensure the latest data is displayed
+        fetchUserData();
       } else {
         console.error('Error updating user data:', response.data.message);
       }
@@ -116,7 +129,7 @@ const UserDashboard = () => {
         <h2 className="text-2xl font-semibold">User Information</h2>
         {editMode ? (
           <form onSubmit={handleUpdate} className="space-y-4">
-            <div>
+            <div className="">
               <label className="block font-medium">Profile Img</label>
               <input
                 type="file"
@@ -124,14 +137,14 @@ const UserDashboard = () => {
                 onChange={handleImageChange}
                 className="border rounded p-2 w-full"
               />
+              {formData.image && (
+                <img
+                  src={formData.image}
+                  alt="Profile Preview"
+                  className="w-20 h-20 rounded-full mt-4"
+                />
+              )}
             </div>
-            {formData.image && (
-              <img
-                src={formData.image}
-                alt="Profile Preview"
-                className="w-20 h-20 rounded-full"
-              />
-            )}
             <div>
               <label className="block font-medium">First Name</label>
               <input
@@ -164,6 +177,7 @@ const UserDashboard = () => {
             </div>
             <button
               type="submit"
+              onClick={handleUpdate}
               className="bg-blue-500 text-white px-4 py-2 rounded"
             >
               Update
@@ -172,7 +186,7 @@ const UserDashboard = () => {
         ) : (
           <div className="space-y-4">
             {user?.image && (
-              <img src={user.image} alt="Profile" className="w-20 h-20 rounded-full" />
+              <img src={user.image} alt="Profile" className="w-20 h-20 rounded-full flex items-center" />
             )}
             <p className="font-medium text-lg">
               <span className="font-bold text-xl">First Name:</span> {user?.firstName}

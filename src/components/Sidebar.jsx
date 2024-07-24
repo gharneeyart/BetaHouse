@@ -46,19 +46,19 @@ const Sidebar = () => {
         <div className="p-6 space-y-8">
           <ul className="space-y-8 pl-4 text-lg">
             <li>
-              <Link to="/" onClick={toggleSidebar}>Home</Link>
+              <Link to="#" onClick={toggleSidebar}>Home</Link>
             </li>
             <li>
-              <Link to="/properties" onClick={toggleSidebar}>Properties</Link>
+              <Link to="/" onClick={toggleSidebar}>Properties</Link>
             </li>
             <li>
-              <Link to="/about" onClick={toggleSidebar}>About Us</Link>
+              <Link to="#" onClick={toggleSidebar}>About Us</Link>
             </li>
             <li>
-              <Link to="/blog" onClick={toggleSidebar}>Blog</Link>
+              <Link to="#" onClick={toggleSidebar}>Blog</Link>
             </li>
             <li>
-              <Link to="/contact" onClick={toggleSidebar}>Contact Us</Link>
+              <Link to="#" onClick={toggleSidebar}>Contact Us</Link>
             </li>
           </ul>
         </div>
