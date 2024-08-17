@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/Auth';
 // import { toast } from "react-toastify";
 
 const SignUp = () => {
-    const [firstName, setFirstName] = useState("");
+    const [firstName, setFirstName] = useState("maureen");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

@@ -23,7 +23,7 @@ const Sidebar = () => {
 
 
   return (
-    <div className="md:hidden fixed z-30 w-full md:w-0 bg-gray-400 py-1 flex justify-between items-center">
+    <div className="md:hidden fixed z-30 w-full md:w-0 bg-gray-400 py-2 flex justify-between items-center">
       
       <div className=" w-[215.66px] h-[47.21px] font-poppins flex items-center pl-4">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
@@ -39,30 +39,39 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-72 bg-[#1D293F] text-white transform ${
+        className={`fixed top-20 left-0 h-full w-72 bg-gray-400 text-white transform ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out z-50`}
       >
+        {/* <div className=" w-[215.66px] h-[47.21px] font-poppins flex items-center pl-4 mt-4">
+          <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white '>BH</span>
+          <span className='font-medium text-[28.33px] text-white'>BetaHouse</span>
+        </div> */}
         <div className="p-6 space-y-8">
           <ul className="space-y-8 pl-4 text-lg">
             <li>
-              <Link to="#" onClick={toggleSidebar}>Home</Link>
+              <Link to="/home" onClick={toggleSidebar}>Home</Link>
             </li>
             <li>
               <Link to="/" onClick={toggleSidebar}>Properties</Link>
             </li>
             <li>
-              <Link to="#" onClick={toggleSidebar}>About Us</Link>
+              <Link to="/about" onClick={toggleSidebar}>About Us</Link>
             </li>
             <li>
-              <Link to="#" onClick={toggleSidebar}>Blog</Link>
+              <Link to="/blog" onClick={toggleSidebar}>Blog</Link>
             </li>
             <li>
-              <Link to="#" onClick={toggleSidebar}>Contact Us</Link>
+              <Link to="/contact" onClick={toggleSidebar}>Contact Us</Link>
             </li>
           </ul>
         </div>
-        <div className="w-auto flex items-center gap-x-4">
+        {!auth.user ? (
+         
+           <button className='bg-white text-[#3D9970] py-1 px-4 text-lg font-medium rounded-md hover:border-2 hover:border-[#3D9970] hover:bg-transparent hover:text-white ml-10'><Link to='/login'>Login</Link></button>
+        
+        ) : (
+          <div className="w-auto flex items-center gap-x-4">
           {auth?.user?.image ? (
             <img src={auth?.user?.image} alt="User" className='rounded-full w-[48.44px] h-[48.44px]' />
           ) : (
@@ -133,17 +142,20 @@ const Sidebar = () => {
             )}
           </div>
         </div>
+        )}
+        
       </div>
 
       {/* Overlay */}
       {isOpen && (
         <div
           onClick={toggleSidebar}
-          className="fixed inset-0 bg-black opacity-50 z-40"
+          className="fixed inset-0  z-40"
           aria-hidden="true"
         ></div>
       )}
     </div>
+    // bg-gray-400
   );
 };
 

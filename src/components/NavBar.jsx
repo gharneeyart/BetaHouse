@@ -27,31 +27,38 @@ const NavBar = () => {
   return (
     <div className='hidden md:block fixed w-full bg-[#1D293F1F] z-30'>
       <div className="max-w-screen-xl mx-auto flex justify-between items-center h-[121px] px-4 md:px-4 lg:px-8 ">
+        <Link to='/'>
         <div className="w-[215.66px] md:w-[180px] h-[47.21px] font-poppins flex items-center">
           <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white'>BH</span>
           <span className='font-medium text-[28.33px] md:text-xl lg:text-[28.33px] text-white text-center'>BetaHouse</span>
         </div>
+        </Link>
         <div>
           <ul className='flex text-xl md:text-sm md:gap-x-3 font-medium lg:gap-x-8 text-[#F5F5F5]'>
             <li>
-              <Link to="#" className={isActive('#') ? 'active-link' : ''}>Home</Link>
+              <Link to="/home" className={isActive('/home') ? 'active-link' : ''}>Home</Link>
             </li>
             <li>
               <Link to="/" className={isActive('/') ? 'active-link' : ''}>Properties</Link>
             </li>
             <li>
-              <Link to="#" className={isActive('#') ? 'active-link' : ''}>About Us</Link>
+              <Link to="/about" className={isActive('/about') ? 'active-link' : ''}>About Us</Link>
             </li>
             <li>
-              <Link to="#" className={isActive('#') ? 'active-link' : ''}>Blog</Link>
+              <Link to="/blog" className={isActive('/blog') ? 'active-link' : ''}>Blog</Link>
             </li>
             <li>
-              <Link to="#" className={isActive('#') ? 'active-link' : ''}>Contact Us</Link>
+              <Link to="/contact" className={isActive('/contact') ? 'active-link' : ''}>Contact Us</Link>
             </li>
           </ul>
         </div>
-        
-        <div className="w-auto flex items-center md:gap-x-2 lg:gap-x-4">
+        {!auth.user ? (
+          <div className="w-44 flex justify-between">
+            <button className='bg-white text-[#3D9970] py-1 px-4 text-sm font-medium rounded-md hover:border-2 hover:border-[#3D9970] hover:bg-transparent hover:text-white'><Link to='/login'>Login</Link></button>
+            <button className='bg-[#3D9970] text-white py-1.5 px-4 text-sm font-medium rounded-md hover:border-2 hover:border-white hover:bg-transparent hover:text-[#3D9970]'><Link to='/signup'>Signup</Link></button>
+          </div>
+        ) : (
+          <div className="w-auto flex items-center md:gap-x-2 lg:gap-x-4">
           {auth?.user?.image ? (
             <img src={auth?.user?.image} alt="User" className='rounded-full w-[48.44px] h-[48.44px]' />
           ) : (
@@ -91,6 +98,7 @@ const NavBar = () => {
                 className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-52 dark:bg-gray-700 pl-2"
               >
                 <ul className="py-2 text-xl text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                  
                   <li>
                     <Link to='/dashboard' className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                       Dashboard
@@ -120,6 +128,8 @@ const NavBar = () => {
             )}
           </div>
         </div>
+        )}
+        
       </div>
     </div>
   );

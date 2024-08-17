@@ -34,15 +34,15 @@ const Discover = () => {
 
   return (
     <div className='h-full px-10 md:px-12 w-full py-12 '>
-      <div className="">
+      <div className="px-4">
         <h1 className='text-center text-xl md:text-3xl lg:text-5xl font-semibold mb-8'>Discover Our Popular Properties</h1>
         <Slider {...settings} className=''>
           {discover.map((property, index) => (
             <div key={index} className="relative m-4">
-              <div className="h-[412px] w-[260px] md:w-[300px] lg:w-[280px] rounded-lg">
+              <div className="h-[412px] w-[260px] md:w-[300px] lg:w-[270px] rounded-lg">
                 <img src={property.image} alt="" className='object-cover h-full w-full rounded-lg'/>
               </div>
-              <div className="absolute top-[200px] left-0 h-[212px] w-[260px] md:w-[300px] lg:w-[280px] text-[#FFFFFF] flex flex-col justify-end rounded-b-lg"  >
+              <div className="absolute top-[200px] left-0 h-[212px] w-[260px] md:w-[300px] lg:w-[270px] text-[#FFFFFF] flex flex-col justify-end rounded-b-lg"  >
                 <div className="bg-[#4A4A4C33] space-y-2 pl-4 pb-4">
                   <div className="font-semibold text-lg space-y-2">
                     <p>Semi Detached Duplex</p>

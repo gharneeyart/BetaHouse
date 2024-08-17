@@ -10,6 +10,10 @@ import Sidebar from './components/Sidebar';
 import UserDashboard from './components/UserDashboard';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
+import Home from './pages/Home';
+import About from './pages/About';
+import Blog from './pages/Blog';
+import Contact from './pages/Contact';
 
 const LayoutWithNavAndFooter = () => (
   <div>
@@ -28,7 +32,11 @@ const App = () => {
      
      <Routes>
         <Route element={<LayoutWithNavAndFooter />}>
+          <Route path="/home" element={<Home/>}/>
           <Route path="/" element={<Property />} />
+          <Route path="/about" element={<About/>}/>
+          <Route path="/blog" element={<Blog/>}/>
+          <Route path="/contact" element={<Contact/>}/>
           <Route path="/dashboard" element={<UserDashboard/>}/>
         </Route>
         <Route path="/signup" element={<SignUp />} />
