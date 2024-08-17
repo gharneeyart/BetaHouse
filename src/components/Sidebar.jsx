@@ -43,10 +43,7 @@ const Sidebar = () => {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out z-50`}
       >
-        {/* <div className=" w-[215.66px] h-[47.21px] font-poppins flex items-center pl-4 mt-4">
-          <span className='bg-[#3D9970] font-bold text-[23.61px] rounded-full p-2 mr-3 text-white '>BH</span>
-          <span className='font-medium text-[28.33px] text-white'>BetaHouse</span>
-        </div> */}
+        
         <div className="p-6 space-y-8">
           <ul className="space-y-8 pl-4 text-lg">
             <li>
